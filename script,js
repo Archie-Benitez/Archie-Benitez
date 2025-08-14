@@ -1,0 +1,17 @@
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Ragnarok Portfolio Loaded');
+
+  const navLinks = document.querySelectorAll('.links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+      console.log(`Navigated to ${targetId}`);
+    });
+  });
+});
