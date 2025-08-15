@@ -1,0 +1,257 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Verdana', sans-serif;
+}
+
+body {
+    background: #f5f0e6; /* light parchment/brown */
+    color: #3e2f1c; /* dark brown text */
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f7e9d7; /* slightly lighter */
+    border-bottom: 3px solid #d4a017; /* gold accent */
+}
+
+header img {
+    width: 120px;
+    border-radius: 50%;
+    border: 3px solid #d4a017;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: 3.5em;
+    color: #d4a017; /* gold */
+    text-shadow: 1px 1px #a07840;
+}
+
+header p {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* CV Button */
+header a {
+    display: inline-block;
+    padding: 15px 35px;
+    background: #d4a017;
+    color: #f5f0e6;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+header a:hover {
+    background: #f0c330;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    background: #e8d6bc;
+    padding: 15px 0;
+    border-bottom: 2px solid #d4a017;
+}
+
+nav a {
+    color: #8b5e3c;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    background: #d4a017;
+    color: #f5f0e6;
+    transform: translateY(-2px);
+}
+
+/* Sections */
+section {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: auto;
+    background: #fff8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px; /* separation between sections */
+}
+
+/* Headings */
+h2 {
+    color: #d4a017;
+    font-size: 2.8em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #8b5e3c;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 1.3em;
+    color: #5c3d1b;
+    margin-bottom: 10px;
+}
+
+/* About Me */
+#About figure {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#About figcaption {
+    font-style: italic;
+    color: #d4a017;
+    margin-top: 8px;
+}
+
+#About p {
+    background: #f5e6d3;
+    padding: 15px 20px;
+    border-left: 5px solid #d4a017;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Cards for lists */
+section ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    justify-content: center;
+}
+
+section ul li {
+    background: #f0d9b5;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    color: #5c3d1b;
+    transition: all 0.3s ease;
+}
+
+section ul li:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Project Figures */
+.project-pic {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.project-pic:hover {
+    transform: scale(1.05);
+}
+
+/* Hobbies & Contacts */
+#Hobby p {
+    background: #f0d9b5;
+    padding: 12px 18px;
+    border-left: 5px solid #d4a017;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: #5c3d1b;
+}
+
+#Contacts ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+
+#Contacts a {
+    color: #d4a017;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+#Contacts a:hover {
+    color: #f0c330;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    background: #e8d6bc;
+    border-top: 2px solid #d4a017;
+    font-size: 0.9em;
+    color: #5c3d1b;
+}
+
+/* ----------------- */
+/* Mobile-Friendly Responsive Styles */
+
+/* Laptops & small desktops */
+@media (max-width: 1024px) {
+    header h1 { font-size: 3em; }
+    header p { font-size: 1.1em; }
+    nav { flex-wrap: wrap; }
+    nav a { font-size: 1.1em; padding: 5px 10px; }
+    section { padding: 40px 15px; margin-bottom: 25px; }
+    h2 { font-size: 2.5em; }
+    h3 { font-size: 1.6em; }
+    h4 { font-size: 1.2em; }
+    section ul li { padding: 12px 20px; }
+}
+
+/* Tablets & medium screens */
+@media (max-width: 768px) {
+    header h1 { font-size: 2.5em; }
+    header p { font-size: 1em; }
+    nav { flex-direction: column; gap: 10px; padding: 10px 0; }
+    nav a { width: 100%; text-align: center; padding: 8px 0; }
+    section ul { flex-direction: column; align-items: center; }
+    section ul li { width: 80%; }
+    .project-pic { max-width: 90%; }
+}
+
+/* Phones & small devices */
+@media (max-width: 480px) {
+    body { font-size: 16px; line-height: 1.5; }
+    header h1 { font-size: 2em; }
+    header p { font-size: 0.9em; }
+    header a { padding: 12px 25px; font-size: 0.9em; }
+    section { padding: 30px 10px; border-radius: 8px; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.4em; }
+    h4 { font-size: 1.1em; }
+    section ul li { width: 100%; padding: 10px 15px; font-size: 1em; }
+    #About p, #Hobby p { padding: 10px 15px; }
+    .project-pic { max-width: 100%; }
+}
