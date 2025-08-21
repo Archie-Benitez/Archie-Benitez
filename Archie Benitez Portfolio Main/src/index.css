@@ -654,3 +654,21 @@
     @apply opacity-100 translate-y-0;
   }
 }
+
+/* Hide scrollbar but keep scroll functional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Horizontal scroll snap for buttons */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-snap-start {
+  scroll-snap-align: start;
+}

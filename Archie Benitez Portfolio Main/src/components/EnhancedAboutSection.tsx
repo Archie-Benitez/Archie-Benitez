@@ -12,7 +12,7 @@ const skills = [
 const stats = [
   { number: 3, label: 'Projects Completed' },
   { number: 3, label: 'Work Experience (Years)' },
-  { number: 1, label: 'Certifications' }, // updated
+  { number: 1, label: 'Certifications' },
   { number: null, label: 'Availability' }, // 24/7
 ];
 
@@ -37,12 +37,12 @@ const EnhancedAboutSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate skill bars
+            // Animate skill bars (fixed values, no randomness)
             skills.forEach((skill, index) => {
               setTimeout(() => {
                 setSkillWidths((prev) => {
                   const newWidths = [...prev];
-                  newWidths[index] = skill.level + Math.floor(Math.random() * 5) - 2;
+                  newWidths[index] = skill.level;
                   return newWidths;
                 });
               }, index * 200);
@@ -98,13 +98,13 @@ const EnhancedAboutSection = () => {
   }, [statsAnimated]);
 
   return (
-    <section id="about" ref={sectionRef} className="min-h-screen py-20 px-4 bg-background relative">
+    <section id="about" ref={sectionRef} className="min-h-screen py-16 px-6 sm:px-8 md:px-12 bg-background relative">
       <div className="container mx-auto max-w-6xl">
 
         {/* About Me */}
         <div className="text-center mb-16 fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">About Me</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">About Me</h2>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             I'm a 21-year-old professional working abroad as a Sales Coordinator at a logistics company. 
             My main focus is landing a career in IT, especially in Networking or Cybersecurity. 
             Currently, I'm pursuing certificates and continuously learning and implementing skills in 
@@ -115,38 +115,38 @@ const EnhancedAboutSection = () => {
         {/* Soft Skills */}
         <div className="mb-12">
           <h3 className="text-2xl font-semibold text-foreground text-center mb-6 fade-in">Core Skills & Attributes</h3>
-          <p className="text-center text-muted-foreground mb-8 max-w-3xl mx-auto fade-in">
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto fade-in">
             Key qualities that define how I work and approach challenges:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {softSkills.map((skill, index) => (
               <div
                 key={skill.name}
-                className={`glass-card p-6 transition-all duration-700 ease-out ${
-                  softVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                } hover:scale-105`}
+                className={`glass-card p-5 sm:p-6 transition-all duration-300 ease-out
+                  ${softVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+                  hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md min-h-[120px]`}
               >
                 <div className="flex items-center mb-3">
-                  <skill.icon className="text-primary mr-3" size={24} />
+                  <skill.icon className="text-primary mr-3" size={26} />
                   <h4 className="text-lg font-semibold text-foreground">{skill.name}</h4>
                 </div>
-                <p className="text-sm text-muted-foreground">{skill.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground">{skill.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* My Journey & Skills */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-20">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-stretch mb-20">
 
           {/* My Journey */}
-          <div className="space-y-8 fade-in delay-100">
-            <div className="glass-card p-6 md:p-8">
+          <div className="w-full lg:w-1/2 space-y-8 fade-in delay-100">
+            <div className="glass-card p-6 md:p-8 h-full">
               <h3 className="text-2xl font-semibold mb-6 text-foreground flex items-center">
                 <Lightbulb className="mr-3 text-primary" size={28} />
                 My Journey
               </h3>
-              <div className="space-y-4 text-muted-foreground leading-relaxed text-sm md:text-base">
+              <div className="space-y-4 text-muted-foreground leading-relaxed text-sm sm:text-base">
                 <p>
                   I started working at 18 and have been grinding ever since — exploring opportunities, 
                   building skills, and staying focused on my main goal: a successful IT career. 
@@ -166,23 +166,28 @@ const EnhancedAboutSection = () => {
           </div>
 
           {/* Skills & Expertise */}
-          <div className="space-y-6 fade-in delay-200">
+          <div className="w-full lg:w-1/2 space-y-6 fade-in delay-200">
             <h3 className="text-2xl font-semibold text-foreground">Skills & Expertise</h3>
             <div className="space-y-4">
               {skills.map(({ icon: Icon, name }, index) => {
                 const level = skillWidths[index] || 0;
                 return (
-                  <div key={name} className="glass-card p-4 group hover:bg-accent/10 transition-all duration-300">
+                  <div
+                    key={name}
+                    className="glass-card p-5 sm:p-6 group transition-all duration-300 ease-out
+                      hover:bg-accent/10 hover:scale-105 active:scale-95
+                      hover:shadow-lg active:shadow-md min-h-[60px]"
+                  >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-3">
                         <Icon className="text-primary group-hover:scale-110 transition-transform duration-300" size={20} />
-                        <span className="font-medium text-foreground text-sm md:text-base">{name}</span>
+                        <span className="font-medium text-foreground text-sm sm:text-base">{name}</span>
                       </div>
-                      <span className="text-sm text-muted-foreground font-semibold">{level}%</span>
+                      <span className="text-xs sm:text-sm text-muted-foreground font-semibold">{level}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-gradient-primary h-2 rounded-full transition-all duration-1200 ease-out transform hover:scale-y-125"
+                        className="bg-gradient-primary h-2 rounded-full transition-all duration-1000 ease-out"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -195,15 +200,17 @@ const EnhancedAboutSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 fade-in delay-300">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 fade-in delay-300">
           {stats.map(({ label }, index) => (
-            <div key={label} className="glass-card p-4 md:p-6 text-center group hover:scale-105 transition-all duration-300">
-              <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2 group-hover:text-primary-dark transition-colors duration-300">
+            <div
+              key={label}
+              className="glass-card p-5 sm:p-6 text-center group transition-all duration-300 ease-out
+                hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md min-h-[100px]"
+            >
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:text-primary-dark transition-colors duration-300">
                 {label === 'Availability' ? '24/7' : statCounts[index]}
               </div>
-              <div className="text-xs md:text-sm text-muted-foreground font-medium">
-                {label}
-              </div>
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">{label}</div>
             </div>
           ))}
         </div>
