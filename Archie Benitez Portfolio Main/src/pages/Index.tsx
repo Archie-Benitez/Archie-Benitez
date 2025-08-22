@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import HeroCarousel from '@/components/HeroCarousel';
+import HeroCarousel from '@/components/HomeSection';
 import SocialNavbar from '@/components/SocialNavbar';
-import EnhancedAboutSection from '@/components/EnhancedAboutSection';
+import EnhancedAboutSection from '@/components/AboutSection';
 import StoriesSection from '@/components/StoriesSection';
-import ModernProjectsSection from '@/components/ModernProjectsSection';
-import EnhancedConnectSection from '@/components/EnhancedConnectSection';
+import ModernProjectsSection from '@/components/ProjectSection';
+import EnhancedConnectSection from '@/components/ConnectSection';
 
 const Index = () => {
   const [showNavbar, setShowNavbar] = useState(false);
