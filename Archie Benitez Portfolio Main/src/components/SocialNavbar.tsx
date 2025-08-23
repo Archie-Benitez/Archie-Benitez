@@ -34,22 +34,51 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
     { icon: Mail, label: 'Connect', href: '#connect' },
   ];
 
-  const menuItemsDesktop: MenuItem[] = [
-    { icon: Download, label: 'Download CV', href: '/archie-benitez-cv.pdf', download: true },
-    { icon: ExternalLink, label: 'Know Me More', href: '#' },
+  const extraItems: MenuItem[] = [
+    { icon: Download, label: 'Download CV', href: '/Archie-Benitez-CV.pdf', download: true },
+    { icon: ExternalLink, label: 'Know Me More', href: 'https://your-other-website.com' },
   ];
 
-  const menuItemsMobile: MenuItem[] = [...navItems, ...menuItemsDesktop];
+  const menuItemsMobile: MenuItem[] = [...navItems, ...extraItems];
 
   const handleNavClick = (href: string) => {
     if (href === '#home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const element = document.querySelector(href);
+      const element = document.querySelector<HTMLElement>(href);
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
+
+  const handleMenuItemClick = (item: MenuItem) => {
+    if (item.href === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (item.href.startsWith('#')) {
+      const section = document.querySelector<HTMLElement>(item.href);
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    } else if (item.download) {
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(item.href, '_blank', 'noopener,noreferrer');
+    }
+    setIsMenuOpen(false);
+  };
+
+  const MenuItemButton = ({ icon: Icon, label, href, download }: MenuItem) => (
+    <button
+      onClick={() => handleMenuItemClick({ icon: Icon, label, href, download })}
+      className="flex items-center space-x-3 px-4 py-3 rounded-lg text-foreground hover:bg-accent/50 transition-all duration-300 font-medium w-full text-left"
+    >
+      <Icon size={20} />
+      <span>{label}</span>
+    </button>
+  );
 
   return (
     <nav
@@ -79,22 +108,22 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
             {/* Desktop Nav Items */}
             {screenWidth >= 768 && (
               <div className="hidden md:flex items-center space-x-2">
-                {navItems.map(({ icon: Icon, label, href }) => (
+                {navItems.map((item) => (
                   <button
-                    key={label}
-                    onClick={() => handleNavClick(href)}
+                    key={item.label}
+                    onClick={() => handleNavClick(item.href)}
                     className="flex items-center space-x-1 px-3 py-2 rounded-lg text-foreground hover:bg-accent/50 transition-all duration-300 font-medium hover:scale-105"
                   >
-                    <Icon size={18} />
-                    <span>{label}</span>
+                    <item.icon size={18} />
+                    <span>{item.label}</span>
                   </button>
                 ))}
 
-                {/* Desktop Hamburger for Download CV + Know Me More */}
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="ml-4 p-2 rounded-lg hover:bg-accent/50 transition-all duration-300"
                   aria-label="Toggle menu"
+                  aria-expanded={isMenuOpen}
                 >
                   {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -108,6 +137,7 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="p-2 rounded-lg hover:bg-accent/50 transition-all duration-300"
                   aria-label="Toggle menu"
+                  aria-expanded={isMenuOpen}
                 >
                   {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -122,20 +152,9 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
             }`}
           >
             <div className="py-4 space-y-2 border-t border-border/20">
-              {(screenWidth >= 768 ? menuItemsDesktop : menuItemsMobile).map(
-                ({ icon: Icon, label, href, download }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    download={download}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-foreground hover:bg-accent/50 transition-all duration-300 font-medium w-full"
-                  >
-                    <Icon size={20} />
-                    <span>{label}</span>
-                  </a>
-                )
-              )}
+              {(screenWidth >= 768 ? extraItems : menuItemsMobile).map((item) => (
+                <MenuItemButton key={item.label} {...item} />
+              ))}
             </div>
           </div>
         </div>

@@ -25,7 +25,7 @@ const softSkills = [
   { icon: Users, name: 'Reliable', description: 'Dependable and consistent in delivering quality results.' },
 ];
 
-const EnhancedAboutSection = () => {
+const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [skillWidths, setSkillWidths] = useState<number[]>(skills.map(() => 0));
   const [softVisible, setSoftVisible] = useState<boolean[]>(softSkills.map(() => false));
@@ -37,7 +37,7 @@ const EnhancedAboutSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate skill bars (fixed values, no randomness)
+            // Animate skill bars
             skills.forEach((skill, index) => {
               setTimeout(() => {
                 setSkillWidths((prev) => {
@@ -65,7 +65,7 @@ const EnhancedAboutSection = () => {
               setTimeout(() => el.classList.add('visible'), index * 100);
             });
 
-            // Animate stats numbers (skip Availability)
+            // Animate stats numbers
             if (!statsAnimated) {
               stats.forEach((stat, index) => {
                 if (stat.label !== 'Availability') {
@@ -229,4 +229,4 @@ const EnhancedAboutSection = () => {
   );
 };
 
-export default EnhancedAboutSection;
+export default AboutSection;

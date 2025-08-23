@@ -9,12 +9,12 @@ const hero5 = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=19
 
 const heroImages = [hero1, hero2, hero3, hero4, hero5];
 
-interface HeroCarouselProps {
-  onAddFriendClick: () => void;
+interface HomeSectionProps {
   addFriendText: string;
+  onAddFriendClick: () => void;
 }
 
-const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) => {
+const HomeSection = ({ addFriendText, onAddFriendClick }: HomeSectionProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -29,8 +29,21 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   const goToSlide = (index: number) => setCurrentSlide(index);
 
-  const handleDownloadCV = () => { console.log('Download CV clicked'); setIsMenuOpen(false); };
-  const handleKnowMeMore = () => { window.open('https://your-other-website.com', '_blank', 'noopener,noreferrer'); setIsMenuOpen(false); };
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/Archie-Benitez-CV.pdf';
+    link.download = 'Archie-Benitez-CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setIsMenuOpen(false);
+  };
+
+  const handleKnowMeMore = () => {
+    window.open('https://your-other-website.com', '_blank', 'noopener,noreferrer');
+    setIsMenuOpen(false);
+  };
+
   const handleMessageClick = () => {
     const connectSection = document.getElementById('connect');
     if (connectSection) connectSection.scrollIntoView({ behavior: 'smooth' });
@@ -71,7 +84,6 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-start mt-[25vh] md:mt-[22vh] lg:mt-[20vh] px-4 sm:px-6 md:px-8 lg:px-12 z-10 max-w-screen-xl mx-auto space-y-2 md:space-y-3 lg:space-y-4">
-
         {/* Profile picture */}
         <div className="relative">
           <img
@@ -79,7 +91,6 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
             alt="Profile"
             className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-full object-cover border-4 border-white shadow-2xl transition-transform duration-300 hover:scale-105"
           />
-          <div className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 bg-success rounded-full border-2 border-white shadow-lg"></div>
         </div>
 
         {/* Title & Subtitle */}
@@ -91,7 +102,7 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mt-2 items-center">
+        <div className="flex flex-wrap justify-center gap-2 mt-2 items-center">
           <button
             onClick={onAddFriendClick}
             className="btn-social btn-primary px-6 py-3 text-lg sm:text-xl md:text-xl lg:text-2xl min-w-[140px] transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md"
@@ -109,7 +120,7 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
           <div className="relative">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="btn-social btn-glass px-5 py-3 text-lg sm:text-xl md:text-xl lg:text-2xl min-w-[60px] transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md"
+              className="btn-social btn-glass px-5 py-3 text-lg sm:text-xl md:text-xl lg:text-2xl min-w-[40px] transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md"
             >
               <Menu size={20} />
             </button>
@@ -133,23 +144,17 @@ const HeroCarousel = ({ onAddFriendClick, addFriendText }: HeroCarouselProps) =>
             )}
           </div>
         </div>
-      </div>
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-        {heroImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+        {/* Static Added to Friend Label */}
+        {addFriendText === 'View Profile' && (
+          <div className="mt-2 text-sm text-green-500 flex items-center justify-center gap-1 select-none">
+            <span>✅</span>
+            <span>added to friend</span>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-export default HeroCarousel;
+export default HomeSection;

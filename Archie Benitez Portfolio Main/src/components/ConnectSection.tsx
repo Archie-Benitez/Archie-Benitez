@@ -9,7 +9,7 @@ const socialLinks = [
   { icon: Mail, label: 'WhatsApp', href: 'https://wa.me/97431081172', color: 'text-green-500' },
 ];
 
-const EnhancedConnectSection = () => {
+const ConnectSection = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -198,4 +198,4 @@ const EnhancedConnectSection = () => {
   );
 };
 
-export default EnhancedConnectSection;
+export default ConnectSection;

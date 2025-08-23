@@ -65,7 +65,7 @@ const platformStyles = {
   instagram: { color: 'bg-gradient-to-tr from-pink-500 via-orange-400 to-purple-500 text-white', icon: Instagram }
 };
 
-const ModernProjectsSection = () => {
+const ProjectSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -98,15 +98,15 @@ const ModernProjectsSection = () => {
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+        {/* Projects Grid: 2 per row on mobile, 3 per row on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((project, index) => {
             const platform = platformStyles[project.platform];
             const Icon = platform.icon;
             return (
-              <div key={project.id} className={`fade-in delay-${(index % 3 + 1) * 100} group h-full`}>
-                <div className="glass-card overflow-hidden hover:scale-105 transition-all duration-500 h-full flex flex-col">
-                  <div className="relative aspect-video overflow-hidden">
+              <div key={project.id} className="fade-in group h-full flex flex-col">
+                <div className="glass-card overflow-hidden hover:scale-105 transition-all duration-500 flex-1 flex flex-col">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -114,19 +114,19 @@ const ModernProjectsSection = () => {
                     />
                   </div>
 
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm flex-1">
+                    <p className="text-muted-foreground mb-3 leading-relaxed text-sm flex-1">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {project.tags.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium hover:bg-primary/20 transition-colors duration-200"
+                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium hover:bg-primary/20 transition-colors duration-200"
                         >
                           {tech}
                         </span>
@@ -137,7 +137,7 @@ const ModernProjectsSection = () => {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${platform.color} flex items-center justify-center gap-2 text-sm font-medium py-3 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95`}
+                      className={`${platform.color} flex items-center justify-center gap-2 text-sm font-medium py-2 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95`}
                     >
                       <Icon size={16} />
                       {project.platform.toUpperCase()}
@@ -157,17 +157,18 @@ const ModernProjectsSection = () => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { platform: 'github', url: 'https://github.com/Archie-Benitez' },
-              { platform: 'youtube', url: 'https://www.youtube.com/@ArchieBenitez101' },
-              { platform: 'facebook', url: 'https://www.facebook.com/ArchieBenitez101/?rdid=JIqActSVxJ7NpdsG' },
-              { platform: 'instagram', url: 'https://www.instagram.com/archie.sc.qa/' }
-            ].map(({ platform, url }) => {
+            {['github', 'youtube', 'facebook', 'instagram'].map((platform) => {
               const { color, icon: Icon } = platformStyles[platform];
+              const urlMap: Record<string, string> = {
+                github: 'https://github.com/ArchieBenitez',
+                youtube: 'https://www.youtube.com/@ArchieBenitez101',
+                facebook: 'https://www.facebook.com/ArchieBenitez101/?rdid=JIqActSVxJ7NpdsG',
+                instagram: 'https://www.instagram.com/archie.sc.qa/'
+              };
               return (
                 <a
                   key={platform}
-                  href={url}
+                  href={urlMap[platform]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${color} flex items-center justify-center gap-2 text-lg font-medium px-6 py-3 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95`}
@@ -184,4 +185,4 @@ const ModernProjectsSection = () => {
   );
 };
 
-export default ModernProjectsSection;
+export default ProjectSection;
