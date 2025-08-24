@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSwipeable } from 'react-swipeable';
 
 // Online images
@@ -313,6 +313,16 @@ const StoriesSection = () => {
           </div>
         </div>
       )}
+      {/* Scroll indicator */}
+        <div className="text-center mt-16 fade-in delay-400">
+          <div className="inline-flex items-center space-x-2 text-muted-foreground">
+            <div className="w-8 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
+            <span className="text-sm">Scroll to see more about me</span>
+            <ChevronDown className="animate-bounce" size={16} />
+            <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
+          </div>
+        </div>
+
     </section>
   );
 };

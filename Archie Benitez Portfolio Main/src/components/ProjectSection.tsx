@@ -98,56 +98,57 @@ const ProjectSection = () => {
           </p>
         </div>
 
-        {/* Projects Grid: 2 per row on mobile, 3 per row on desktop */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {projects.map((project, index) => {
-            const platform = platformStyles[project.platform];
-            const Icon = platform.icon;
-            return (
-              <div key={project.id} className="fade-in group h-full flex flex-col">
-                <div className="glass-card overflow-hidden hover:scale-105 transition-all duration-500 flex-1 flex flex-col">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  </div>
+{/* Projects Grid: 2 per row on mobile, 3 on desktop, constrained width for mobile */}
+<div className="grid grid-cols-2 gap-4 justify-center sm:grid-cols-2 md:grid-cols-3">
+  {projects.map((project) => {
+    const platform = platformStyles[project.platform];
+    const Icon = platform.icon;
+    return (
+      <div key={project.id} className="fade-in group flex justify-center">
+        <div className="glass-card overflow-hidden hover:scale-105 transition-all duration-500 w-full max-w-[260px] md:max-w-full flex flex-col">
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
 
-                  <div className="p-4 sm:p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-3 leading-relaxed text-sm flex-1">
-                      {project.description}
-                    </p>
+          <div className="p-4 sm:p-6 flex-1 flex flex-col">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+              {project.title}
+            </h3>
+            <p className="text-muted-foreground mb-3 leading-relaxed text-sm flex-1">
+              {project.description}
+            </p>
 
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {project.tags.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium hover:bg-primary/20 transition-colors duration-200"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {project.tags.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium hover:bg-primary/20 transition-colors duration-200"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
 
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${platform.color} flex items-center justify-center gap-2 text-sm font-medium py-2 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95`}
-                    >
-                      <Icon size={16} />
-                      {project.platform.toUpperCase()}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${platform.color} flex items-center justify-center gap-2 text-sm font-medium py-2 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95`}
+            >
+              <Icon size={16} />
+              {project.platform.toUpperCase()}
+            </a>
+          </div>
         </div>
+      </div>
+    );
+  })}
+</div>
+
 
         {/* Visit My Projects Section */}
         <div className="text-center mt-16 fade-in delay-400">

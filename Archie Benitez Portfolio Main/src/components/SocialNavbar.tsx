@@ -95,7 +95,7 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
                 <img
                   src={hero1}
                   alt="Profile"
-                  className="w-10 h-10 rounded-full object-cover border-2 border-primary/20 transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full object-cover object-bottom border-2 border-primary/20 transition-all duration-300 hover:scale-110"
                 />
                 <div className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-success rounded-full border-2 border-white transition-all duration-300"></div>
               </div>

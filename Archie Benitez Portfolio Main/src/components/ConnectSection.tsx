@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { Mail, Send, User, Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const socialLinks = [
   { icon: Youtube, label: 'YouTube', href: 'https://youtube.com/@ArchieBenitez101', color: 'text-red-600' },
   { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/archie.sc.qa', color: 'text-pink-600' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/archie-benitez-916b08247', color: 'text-blue-700' },
-  { icon: Facebook, label: 'Facebook Page', href: 'https://facebook.com/share/1BmbXy1PzJ/', color: 'text-blue-600' },
+  { icon: Facebook, label: 'Facebook', href: 'https://facebook.com/share/1BmbXy1PzJ/', color: 'text-blue-600' },
   { icon: Mail, label: 'WhatsApp', href: 'https://wa.me/97431081172', color: 'text-green-500' },
 ];
 
@@ -43,11 +44,27 @@ const ConnectSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await fetch('mailto:archieb.connect@gmail.com');
+    try {
+      await emailjs.send(
+        'service_zxr0jko',   // replace with your EmailJS service ID
+        'template_huvfajy',  // replace with your EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        'm-VqVdS9IFM8ZDxpk'     // replace with your EmailJS public key
+      );
 
-    setFormData({ name: '', email: '', subject: '', message: '' });
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      alert('Failed to send message. Try again later.');
+      console.error(error);
+    }
+
     setIsSubmitting(false);
-    alert('Message sent successfully!');
   };
 
   const handleDownloadCV = () => {
@@ -64,6 +81,7 @@ const ConnectSection = () => {
   return (
     <section id="connect" ref={sectionRef} className="py-20 px-4 bg-background">
       <div className="container mx-auto max-w-6xl">
+        {/* Header */}
         <div className="text-center mb-16 fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Let's Connect</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -153,7 +171,8 @@ const ConnectSection = () => {
                 Follow Me
               </h3>
 
-              <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 mb-8">
+              {/* Social Links Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -167,13 +186,14 @@ const ConnectSection = () => {
                       size={28}
                       className={`${social.color} mb-2 transition-transform duration-300 group-hover:scale-110`}
                     />
-                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-300 truncate">
                       {social.label}
                     </span>
                   </a>
                 ))}
               </div>
 
+              {/* CV & Know Me More Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handleDownloadCV}

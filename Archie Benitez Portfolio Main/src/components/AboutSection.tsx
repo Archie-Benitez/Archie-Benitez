@@ -118,13 +118,13 @@ const AboutSection = () => {
           <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto fade-in">
             Key qualities that define how I work and approach challenges:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {softSkills.map((skill, index) => (
               <div
                 key={skill.name}
-                className={`glass-card p-5 sm:p-6 transition-all duration-300 ease-out
+                className={`glass-card p-4 sm:p-6 transition-all duration-300 ease-out
                   ${softVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
-                  hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md min-h-[120px]`}
+                  hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md min-h-[100px] sm:min-h-[120px]`}
               >
                 <div className="flex items-center mb-3">
                   <skill.icon className="text-primary mr-3" size={26} />
