@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Code2, Rocket, Globe, Heart, Coffee, Lightbulb, ChevronDown, Users, Monitor, BarChart2 } from 'lucide-react';
+import { Code2, Rocket, Globe, Heart, Coffee, Lightbulb, ChevronDown, Users, BarChart2 } from 'lucide-react';
 
 const skills = [
   { icon: Code2, name: 'Programming & Web Development', level: 32 },
   { icon: Globe, name: 'Network Engineering & Cybersecurity', level: 43 },
   { icon: Rocket, name: 'Project Management', level: 68 },
-  { icon: Monitor, name: 'Computer Literacy', level: 91 },
   { icon: BarChart2, name: 'Marketing & Communication', level: 38 },
 ];
 
@@ -13,7 +12,7 @@ const stats = [
   { number: 3, label: 'Projects Completed' },
   { number: 3, label: 'Work Experience (Years)' },
   { number: 1, label: 'Certifications' },
-  { number: null, label: 'Availability' }, // 24/7
+  { number: null, label: 'Availability' },
 ];
 
 const softSkills = [
@@ -25,19 +24,30 @@ const softSkills = [
   { icon: Users, name: 'Reliable', description: 'Dependable and consistent in delivering quality results.' },
 ];
 
+// Tech icons
+const techIcons = [
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+];
+
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [skillWidths, setSkillWidths] = useState<number[]>(skills.map(() => 0));
   const [softVisible, setSoftVisible] = useState<boolean[]>(softSkills.map(() => false));
-  const [statCounts, setStatCounts] = useState<number[]>(stats.map((s) => (s.number ?? 0)));
   const [statsAnimated, setStatsAnimated] = useState(false);
+  const [statCounts, setStatCounts] = useState<number[]>(stats.map((s) => s.number ?? 0));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate skill bars
             skills.forEach((skill, index) => {
               setTimeout(() => {
                 setSkillWidths((prev) => {
@@ -48,7 +58,6 @@ const AboutSection = () => {
               }, index * 200);
             });
 
-            // Animate soft skills
             softSkills.forEach((_, index) => {
               setTimeout(() => {
                 setSoftVisible((prev) => {
@@ -59,13 +68,11 @@ const AboutSection = () => {
               }, index * 150);
             });
 
-            // Animate fade-in elements
             const elements = entry.target.querySelectorAll('.fade-in');
             elements.forEach((el, index) => {
               setTimeout(() => el.classList.add('visible'), index * 100);
             });
 
-            // Animate stats numbers
             if (!statsAnimated) {
               stats.forEach((stat, index) => {
                 if (stat.label !== 'Availability') {
@@ -98,8 +105,8 @@ const AboutSection = () => {
   }, [statsAnimated]);
 
   return (
-    <section id="about" ref={sectionRef} className="min-h-screen py-16 px-6 sm:px-8 md:px-12 bg-background relative">
-      <div className="container mx-auto max-w-6xl">
+    <section id="about" ref={sectionRef} className="relative min-h-screen py-16 px-6 sm:px-8 md:px-12">
+      <div className="container mx-auto max-w-6xl relative z-10">
 
         {/* About Me */}
         <div className="text-center mb-16 fade-in">
@@ -141,12 +148,12 @@ const AboutSection = () => {
 
           {/* My Journey */}
           <div className="w-full lg:w-1/2 space-y-8 fade-in delay-100">
-            <div className="glass-card p-6 md:p-8 h-full">
-              <h3 className="text-2xl font-semibold mb-6 text-foreground flex items-center">
+            <div className="glass-card p-6 md:p-8 h-full flex flex-col">
+              <h3 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-semibold mb-6 text-foreground flex items-center">
                 <Lightbulb className="mr-3 text-primary" size={28} />
                 My Journey
               </h3>
-              <div className="space-y-4 text-muted-foreground leading-relaxed text-sm sm:text-base">
+              <div className="space-y-4 text-muted-foreground leading-relaxed text-base sm:text-lg md:text-lg flex-1">
                 <p>
                   I started working at 18 and have been grinding ever since — exploring opportunities, 
                   building skills, and staying focused on my main goal: a successful IT career. 
@@ -166,34 +173,52 @@ const AboutSection = () => {
           </div>
 
           {/* Skills & Expertise */}
-          <div className="w-full lg:w-1/2 space-y-6 fade-in delay-200">
+          <div className="w-full lg:w-1/2 space-y-6 fade-in delay-200 flex flex-col justify-between">
             <h3 className="text-2xl font-semibold text-foreground">Skills & Expertise</h3>
-            <div className="space-y-4">
+            <div className="space-y-4 flex-1 flex flex-col justify-between">
+
+              {/* Normal skills with labels */}
               {skills.map(({ icon: Icon, name }, index) => {
                 const level = skillWidths[index] || 0;
                 return (
                   <div
                     key={name}
-                    className="glass-card p-5 sm:p-6 group transition-all duration-300 ease-out
-                      hover:bg-accent/10 hover:scale-105 active:scale-95
-                      hover:shadow-lg active:shadow-md min-h-[60px]"
+                    className="glass-card p-5 sm:p-6 group flex items-center transition-all duration-300 ease-out
+                      hover:bg-accent/10 hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-md min-h-[60px]"
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-3">
-                        <Icon className="text-primary group-hover:scale-110 transition-transform duration-300" size={20} />
-                        <span className="font-medium text-foreground text-sm sm:text-base">{name}</span>
+                    <Icon className="text-primary group-hover:scale-110 transition-transform duration-300 mr-4" size={20} />
+                    <div className="flex-1">
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm sm:text-base text-foreground font-medium">{name}</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground font-semibold">{level}%</span>
                       </div>
-                      <span className="text-xs sm:text-sm text-muted-foreground font-semibold">{level}%</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                      <div
-                        className="bg-gradient-primary h-2 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${level}%` }}
-                      ></div>
+                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-gradient-primary h-2 rounded-full transition-all duration-1000 ease-out"
+                          style={{ width: `${level}%` }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 );
               })}
+
+              {/* Tech icons in a single row, slightly larger and centered */}
+              <div className="glass-card p-5 sm:p-6 flex justify-center flex-wrap gap-3 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg bg-background/20 rounded-xl">
+                {techIcons.map((src, idx) => (
+                  <div
+                    key={idx}
+                    className="p-1.5 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300 shadow-md hover:shadow-lg"
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      className="w-6 h-6 sm:w-7 sm:h-7 md:w-7 md:h-7 lg:w-8 lg:h-8 object-contain transition-all duration-300 hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
 
@@ -224,6 +249,7 @@ const AboutSection = () => {
             <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
           </div>
         </div>
+
       </div>
     </section>
   );

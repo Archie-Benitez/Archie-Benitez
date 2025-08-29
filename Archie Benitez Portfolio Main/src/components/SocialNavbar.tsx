@@ -58,17 +58,25 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
       const section = document.querySelector<HTMLElement>(item.href);
       if (section) section.scrollIntoView({ behavior: 'smooth' });
     } else if (item.download) {
-      const link = document.createElement('a');
-      link.href = item.href;
-      link.download = '';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        // Open in new tab on mobile
+        window.open(item.href, '_blank');
+      } else {
+        // Desktop download
+        const link = document.createElement('a');
+        link.href = item.href;
+        link.download = '';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     } else {
       window.open(item.href, '_blank', 'noopener,noreferrer');
     }
     setIsMenuOpen(false);
   };
+
 
   const MenuItemButton = ({ icon: Icon, label, href, download }: MenuItem) => (
     <button

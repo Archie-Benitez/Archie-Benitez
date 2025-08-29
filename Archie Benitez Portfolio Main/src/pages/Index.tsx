@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import HomeSection from '@/components/HomeSection';
 import SocialNavbar from '@/components/SocialNavbar';
 import AboutSection from '@/components/AboutSection';
-import StoriesSection from '@/components/StoriesSection';
 import ProjectSection from '@/components/ProjectSection';
 import ConnectSection from '@/components/ConnectSection';
 
@@ -26,7 +25,7 @@ const Index = () => {
 
   // Add Friend / View Profile behavior
   const handleAddFriendClick = () => {
-    const storiesSection = document.getElementById('stories');
+    const aboutSection = document.getElementById('about');
 
     if (addFriendText === 'Add Friend') {
       setAddFriendText('View Profile');
@@ -34,11 +33,12 @@ const Index = () => {
       document.body.style.overflow = 'auto'; // enable scrolling
 
       localStorage.setItem('addedFriend', 'true');
-      // Smooth scroll to Stories section
-      if (storiesSection) storiesSection.scrollIntoView({ behavior: 'smooth' });
+
+      // Smooth scroll to About section
+      if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // If already "View Profile", just scroll to Stories section
-      if (storiesSection) storiesSection.scrollIntoView({ behavior: 'smooth' });
+      // If already "View Profile", just scroll to About section
+      if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -71,7 +71,6 @@ const Index = () => {
           isPageRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
       >
-        <StoriesSection />
         <AboutSection />
         <ProjectSection />
         <ConnectSection />

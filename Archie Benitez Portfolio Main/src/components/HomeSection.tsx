@@ -12,7 +12,7 @@ const heroImages = [hero2, hero3, hero4, hero5, hero6];
 interface HomeSectionProps {
   addFriendText: string;
   onAddFriendClick: () => void;
-  variant?: 'hero' | 'card'; // 👈 new prop
+  variant?: 'hero' | 'card';
 }
 
 const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: HomeSectionProps) => {
@@ -30,12 +30,19 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
 
   const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/Archie-Benitez-CV.pdf';
-    link.download = 'Archie-Benitez-CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const cvUrl = '/Archie-Benitez-CV.pdf';
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      window.open(cvUrl, '_blank');
+    } else {
+      const link = document.createElement('a');
+      link.href = cvUrl;
+      link.download = 'Archie-Benitez-CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
     setIsMenuOpen(false);
   };
 
@@ -49,7 +56,6 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
     if (connectSection) connectSection.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // 👇 responsive sizing based on variant
   const profileSizeClasses =
     variant === 'hero'
       ? 'w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 xl:w-60 xl:h-60'
@@ -57,6 +63,7 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
+      {/* Hero Images */}
       <div className="absolute inset-0">
         {heroImages.map((image, index) => (
           <div
@@ -91,9 +98,9 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
         <ChevronRight size={20} />
       </button>
 
-      {/* Content Overlay */}
+      {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-start mt-[25vh] md:mt-[22vh] lg:mt-[20vh] px-4 sm:px-6 md:px-8 lg:px-12 z-10 max-w-screen-xl mx-auto space-y-2 md:space-y-3 lg:space-y-4">
-        {/* Profile picture */}
+        {/* Profile */}
         <div className="relative">
           <img
             src={hero1}
@@ -102,7 +109,7 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
           />
         </div>
 
-        {/* Title & Subtitle */}
+        {/* Name & Tagline */}
         {variant === 'hero' && (
           <>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl 2xl:text-7xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent text-center leading-tight">
@@ -139,7 +146,7 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
                 <Menu size={20} />
               </button>
 
-              {/* Desktop dropdown */}
+              {/* Dropdown */}
               <div className="hidden sm:block">
                 {isMenuOpen && (
                   <div className="absolute top-0 left-full ml-2 w-44 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl z-50">
@@ -164,7 +171,7 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
           </div>
         )}
 
-        {/* Static Added to Friend Label */}
+        {/* Added to Friend Label */}
         {addFriendText === 'View Profile' && variant === 'hero' && (
           <div className="mt-2 text-sm text-green-500 flex items-center justify-center gap-1 select-none">
             <span>✅</span>
@@ -176,12 +183,7 @@ const HomeSection = ({ addFriendText, onAddFriendClick, variant = 'hero' }: Home
       {/* Mobile Bottom Sheet */}
       {isMenuOpen && variant === 'hero' && (
         <div className="fixed inset-0 z-50 flex justify-center items-end sm:hidden">
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          {/* Bottom sheet */}
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsMenuOpen(false)} />
           <div className="relative w-full bg-black/90 backdrop-blur-md rounded-t-xl p-4 space-y-3 animate-slide-up">
             <button
               onClick={handleDownloadCV}
