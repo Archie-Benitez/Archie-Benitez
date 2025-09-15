@@ -35,8 +35,7 @@ const SocialNavbar = ({ isVisible }: SocialNavbarProps) => {
   ];
 
   const extraItems: MenuItem[] = [
-    { icon: Download, label: 'Download CV', href: '/Archie-Benitez-CV.pdf', download: true },
-    { icon: ExternalLink, label: 'Know Me More', href: 'https://your-other-website.com' },
+    { icon: Download, label: 'Download CV', href: '/Archie-Benitez-CV.pdf', download: true }
   ];
 
   const menuItemsMobile: MenuItem[] = [...navItems, ...extraItems];

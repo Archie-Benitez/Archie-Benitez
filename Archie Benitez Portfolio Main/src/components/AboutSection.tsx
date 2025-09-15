@@ -112,8 +112,9 @@ const AboutSection = () => {
         <div className="text-center mb-16 fade-in">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">About Me</h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I'm a 21-year-old professional working abroad as a Sales Coordinator at a logistics company. 
+            I'm a 21 years old working abroad as a Sales Coordinator at a logistics company. 
             My main focus is landing a career in IT, especially in Networking or Cybersecurity. 
+            <br /><br />
             Currently, I'm pursuing certificates and continuously learning and implementing skills in 
             cybersecurity, network engineering, and programming. I take pride in delivering exactly what is expected — no shortcuts, just dedication and hard work.
           </p>
@@ -123,7 +124,7 @@ const AboutSection = () => {
         <div className="mb-12">
           <h3 className="text-2xl font-semibold text-foreground text-center mb-6 fade-in">Core Skills & Attributes</h3>
           <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto fade-in">
-            Key qualities that define how I work and approach challenges:
+            Qualities that define how I work and approach challenges:
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {softSkills.map((skill, index) => (
@@ -154,20 +155,20 @@ const AboutSection = () => {
                 My Journey
               </h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed text-base sm:text-lg md:text-lg flex-1">
-                <p>
-                  I started working at 18 and have been grinding ever since — exploring opportunities, 
-                  building skills, and staying focused on my main goal: a successful IT career. 
-                  Everything I do is step by step, with discipline, learning continuously, 
-                  and ensuring I provide my best in every task.
-                </p>
-                <p>
-                  I’ve completed three key projects so far: a Linux live bootable, router configuration, and this portfolio website.
-                  These projects reflect my practical skills and ability to apply knowledge effectively.
-                </p>
-                <p>
-                  While my current role is in logistics, my focus remains on IT. I am actively pursuing 
-                  certifications, enhancing my skills, and preparing for a career in Networking or Cybersecurity.
-                </p>
+              <p>
+                I started working at 18, and along the way I’ve been on and off with tech — exploring it whenever I could, 
+                while also building experience in different fields. Each step has taught me the value of discipline, 
+                consistency, and always giving my best in whatever I do.
+              </p>
+              <p>
+                Over time, I’ve worked on projects like creating a Linux live bootable system, configuring routers, 
+                and building this portfolio site. These gave me a chance to apply what I’ve learned in practical ways 
+                and sharpen my problem-solving skills.
+              </p>
+              <p>
+                Even though my current role is in logistics, I continue to grow in tech by pursuing certifications, 
+                expanding my knowledge, and keeping myself ready for new opportunities in the IT field.
+              </p>
               </div>
             </div>
           </div>
