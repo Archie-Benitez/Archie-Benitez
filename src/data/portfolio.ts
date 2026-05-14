@@ -25,8 +25,8 @@ export const techStack = [
   { category: "Frontend", tags: ["React", "Next.js", "Vite", "Tailwind CSS", "shadcn/ui"], variant: undefined },
   { category: "Backend & Database", tags: [".NET", "Supabase", "PostgreSQL", "MySQL", "MSSQL"], variant: undefined },
   { category: "Tools & Infra", tags: ["Git", "GitHub", "Linux", "Vercel", "Cloudflare"], variant: undefined },
-  { category: "AI Tools", tags: ["Claude", "Cursor", "v0", "Lovable", "Gemini", "Kimi", "Antigravity"], variant: undefined },
-  { category: "Currently Learning", tags: ["Azure", "Docker", "Active Directory"], variant: "learning" as const },
+  { category: "AI Tools", tags: ["Claude", "Cursor", "v0", "Lovable", "Gemini", "Kimi", "Antigravity", "ChatGPT"], variant: undefined },
+  { category: "Currently Learning", tags: ["Azure", "Docker", "Active Directory", "Game Development"], variant: "learning" as const },
 ]
 
 export type ProjectStatus = "live" | "wip" | "built"
@@ -35,8 +35,9 @@ export interface Project {
   id: string
   name: string
   image?: string
+  icon?: string
   status: ProjectStatus
-  emoji: string
+  emoji?: string
   shortDesc: string
   fullDesc: string
   stack: string[]
@@ -45,15 +46,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "cargodesk",
-    name: "CargoDesk",
-    image: "",
-    status: "wip",
-    emoji: "📦",
-    shortDesc: "Cargo Management System for Filipino door-to-door balikbayan box companies. Customer tracking + admin panel.",
-    fullDesc: "A cargo management system for small Filipino door-to-door companies handling balikbayan boxes. Public customer-facing site for shipment tracking and no login required. Separate invite-only admin panel with dashboard, Excel export/import, Supabase auth, and row-level security.",
-    stack: ["React", "Vite", "Supabase", "Cloudflare Workers", "Cloudflare Turnstile", "Vercel"],
-    links: [{ label: "GitHub ↗", url: "#" }, { label: "Live Demo ↗", url: "#" }],
+    id: "router-lab",
+    name: "Router Setup & Configuration",
+    image: "/projects/project-router.png",
+    status: "live",
+    emoji: "🔌",
+    shortDesc: "Hands-on D-Link router reset, setup, and configuration. Documented as a networking reference.",
+    fullDesc: "Hands-on D-Link router setup including factory reset, manual IP configuration, DHCP settings, and wireless security. Documented step-by-step and shared on YouTube as a tutorial.",
+    stack: ["Networking", "D-Link", "DHCP", "Wireless Security"],
+    links: [{ label: "YouTube ↗", url: "https://www.youtube.com/watch?v=z_qFKAg6ZAw" }],
   },
   {
     id: "company-website",
@@ -78,16 +79,28 @@ export const projects: Project[] = [
     links: [{ label: "GitHub ↗", url: "https://github.com/Archie-Benitez/Archie-Benitez" }, { label: "Live ↗", url: "https://archiebenitez.vercel.app/" }],
   },
   {
-    id: "router-lab",
-    name: "Router Setup & Configuration",
-    image: "/projects/project-router.png",
-    status: "live",
-    emoji: "🔌",
-    shortDesc: "Hands-on D-Link router reset, setup, and configuration. Documented as a networking reference.",
-    fullDesc: "Hands-on D-Link router setup including factory reset, manual IP configuration, DHCP settings, and wireless security. Documented step-by-step and shared on YouTube as a tutorial.",
-    stack: ["Networking", "D-Link", "DHCP", "Wireless Security"],
-    links: [{ label: "YouTube ↗", url: "https://www.youtube.com/watch?v=z_qFKAg6ZAw" }],
+    id: "cargodesk",
+    name: "CargoDesk",
+    image: "",
+    status: "wip",
+    emoji: "📦",
+    shortDesc: "Cargo Management System for Filipino door-to-door balikbayan box companies. Customer tracking + admin panel.",
+    fullDesc: "A cargo management system for small Filipino door-to-door companies handling balikbayan boxes. Public customer-facing site for shipment tracking and no login required. Separate invite-only admin panel with dashboard, Excel export/import, Supabase auth, and row-level security.",
+    stack: ["React", "Vite", "Supabase", "Cloudflare Workers", "Cloudflare Turnstile", "Vercel"],
+    links: [{ label: "GitHub ↗", url: "#" }, { label: "Live Demo ↗", url: "#" }],
   },
+  {
+    id: "freshwater",
+    name: "Fresh Water (Game)",
+    image: "/projects/project-freshwater.png",
+    icon: "/projects/project-freshwater-icon.ico",
+    status: "wip",
+    emoji: "🐟",
+    shortDesc: "A Cozy diorama-style game about fishkeeping. Focus on atmosphere and chill gameplay. Built in Godot.",
+    fullDesc: "A Cozy diorama-style game about fishkeeping. Focus on atmosphere and chill gameplay. Built in Godot.",
+    stack: ["Godot, GDScript, Ludo AI, Claude, ChatGPT"],
+    links: [{ label: "GitHub ↗", url: "#" }, { label: "Download", url: "#" }],
+  }
 ]
 
 export const certifications = [

@@ -1,7 +1,7 @@
 import { personal, projects } from "../data/portfolio"
 
 export default function BentoGrid() {
-  const featured = projects[0]
+  const featured = projects.at(-1) ?? projects[0]
   return (
     <section>
       <div className="sec-label">Quick Info</div>
@@ -24,7 +24,11 @@ export default function BentoGrid() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: ".875rem" }}>
-            <span style={{ fontSize: 34, lineHeight: 1 }}>{featured.emoji}</span>
+            {featured.icon ? (
+              <img src={featured.icon} alt={featured.name} style={{ width: 40, height: 40, objectFit: "contain" }} />
+            ) : (
+              <span style={{ fontSize: 34, lineHeight: 1 }}>{featured.emoji}</span>
+            )}
             <div style={{ minWidth: 0 }}>
               <div style={{
                 fontSize: 15,

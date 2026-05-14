@@ -16,7 +16,11 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
           {project.image ? (
             <img src={project.image} alt={project.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
           ) : (
-            <span style={{ position: "relative", zIndex: 1 }}>{project.emoji}</span>
+            project.icon ? (
+              <img src={project.icon} alt={project.name} style={{ position: "relative", zIndex: 1, width: 72, height: 72, objectFit: "contain" }} />
+            ) : (
+              <span style={{ position: "relative", zIndex: 1 }}>{project.emoji}</span>
+            )
           )}
           <button
             onClick={onClose}
@@ -55,6 +59,8 @@ export default function ProjectGrid() {
   const [activeModal, setActiveModal] = useState<Project | null>(null)
   const navigate = useNavigate()
 
+  const recentProjects = projects.slice(-4).reverse()
+
   return (
     <section id="projects">
       <div className="sec-label">
@@ -62,7 +68,7 @@ export default function ProjectGrid() {
         <a href="#" onClick={(e) => { e.preventDefault(); navigate("/projects") }} style={{ fontSize: 10, fontWeight: 600, color: "var(--p-accent)", textDecoration: "none", letterSpacing: ".05em", marginLeft: ".25rem" }}>View All →</a>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
-        {projects.map((project) => (
+        {recentProjects.map((project) => (
           <div key={project.id} className="flip-wrap" style={{ height: 210 }} onClick={() => setActiveModal(project)}>
             <div className="flip-inner">
               <div className="flip-front">
@@ -73,7 +79,13 @@ export default function ProjectGrid() {
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
                   />
                   ) : (
-                <div className="flip-placeholder">{project.emoji}</div>
+                <div className="flip-placeholder">
+                  {project.icon ? (
+                    <img src={project.icon} alt={project.name} style={{ width: 48, height: 48, objectFit: "contain" }} />
+                  ) : (
+                    project.emoji
+                  )}
+                </div>
                   )}
                 <div className="flip-label">
                   <div style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.2 }}>{project.name}</div>

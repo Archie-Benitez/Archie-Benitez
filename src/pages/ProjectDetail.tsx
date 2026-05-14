@@ -24,7 +24,11 @@ export default function ProjectDetail() {
         {project.image ? (
           <img src={project.image} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
         ) : (
-          project.emoji
+          project.icon ? (
+            <img src={project.icon} alt={project.name} style={{ width: 120, height: 120, objectFit: "contain" }} />
+          ) : (
+            project.emoji
+          )
         )}
       </div>
       <h1 style={{ fontSize: "clamp(1.75rem, 5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.1, marginBottom: ".5rem" }}>{project.name}</h1>
